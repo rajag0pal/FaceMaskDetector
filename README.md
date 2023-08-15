@@ -31,18 +31,21 @@ Leveraged pretrained models like **Mobilenet SSD** and **EfficientDET** from Ten
 ```
 FaceMaskDetector/
         ├─ Tensorflow/
-           ├─ models/
-           |    ├─ ..
-           |    ├─ research/
-           |    |    ├─ object_detection/
-           |    |               ├─ ..  
-           ├─ scripts/
-           |    ├─ generate_tfrecord.py
-           └─ workspace/
-           |    ├─ annotations
-           |    ├─ images
-           |    ├─ models
-           |    └─ pretrained-models
+        |  ├─ models/
+        |  |    ├─ ..
+        |  |    ├─ research/
+        |  |    |    ├─ object_detection/
+        |  |    |               ├─ ..  
+        |  ├─ scripts/
+        |  |    ├─ generate_tfrecord.py
+        |  └─ workspace/
+        |  |    ├─ annotations
+        |  |    ├─ images
+        |  |    |   ├─ allimages
+        |  |    |   ├─ train
+        |  |    |   └─ test
+        |  |    ├─ models
+        |  |    └─ pretrained-models
 ```
 Make sure you create all these directories in your environment before begin to build the model.
 
@@ -74,4 +77,99 @@ Once the API is copied, paste the command in the python shell, and run it.
 !kaggle datasets download -d andrewmvd/face-mask-detection
 ```
 
+Once the dataset has been downloaded using kaggle API, it has to be unzipped accordingly now in the respective directories. The face mask dataset zip file contains following files.
 
+```
+face-mask-detection.zip
+        ├─ images
+        └─ annotations
+```
+
+Image has to be unzipped to 'Tensorflow/workspaces/allimages' directory and then train test split has to be done.
+
+```
+# unzipping images seperately
+!unzip -j face-mask-detection.zip 'images/*' -d Tensorflow/workspace/images/allimages
+
+# unzipping annoations seperately
+!unzip -j face-mask-detection.zip 'annotations/*' -d Tensorflow/workspace/images/allimages
+```
+
+### Train Test Split
+
+Use the following scrpit to seperate data into train and test
+
+```
+import os
+import random
+import shutil
+
+# Set the paths for your source and destination folders
+source_folder = 'allimages/'
+train_folder = 'train/'
+test_folder = 'test/'
+
+# Set the desired split ratio
+split_ratio = 0.8
+
+# Get a list of all image files in the source folder
+image_files = [f for f in os.listdir(source_folder) if f.endswith('.png')]
+
+# Shuffle the list of image files
+random.shuffle(image_files)
+
+# Calculate the split point
+split_index = int(len(image_files) * split_ratio)
+
+# Split the image files
+train_images = image_files[:split_index]
+test_images = image_files[split_index:]
+```
+```
+# Move images and annotations to train folder
+for image in train_images:
+    annotation = image.replace('.png', '.xml')
+    shutil.move(os.path.join(source_folder, image), os.path.join(train_folder))
+    shutil.move(os.path.join(source_folder, annotation), os.path.join(train_folder))
+```
+```
+# Move images and annotations to test folder
+for image in test_images:
+    annotation = image.replace('.png', '.xml')
+    shutil.move(os.path.join(source_folder, image), os.path.join(test_folder))
+    shutil.move(os.path.join(source_folder, annotation), os.path.join(test_folder))
+```
+
+## Tensorflow Object Detection API
+
+clone the API from this github repo https://github.com/tensorflow/models
+
+```
+!cd Tensorflow && git clone https://github.com/tensorflow/models
+```
+
+Change the current directory to models/research/
+
+```
+cd Tensorflow/models/research
+```
+
+### Protocol Buffers
+
+```
+!protoc object_detection/protos/*.proto --python_out=.
+```
+If protoc is not installl in your machine, we need to download it explictly by heading towards protoc releases github page (https://github.com/protocolbuffers/protobuf/releases)
+
+Go to Assets -> select the version for the os you have
+
+Protoc 24.0-win32 - https://github.com/protocolbuffers/protobuf/releases/download/v24.0/protoc-24.0-win32.zip <br>
+Protoc 24.0-win64 - https://github.com/protocolbuffers/protobuf/releases/download/v24.0/protoc-24.0-win64.zip
+### Installing the Dependencies
+```
+!cp object_detection/packages/tf2/setup.py .
+!python -m pip install .
+```
+
+### For detailed Tensorflow Object Detection API tutorial
+https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/install.html
