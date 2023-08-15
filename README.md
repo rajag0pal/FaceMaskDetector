@@ -258,3 +258,17 @@ Output:
 +-------------------------------+----------------------+----------------------+
 ```
 We will get exactly like this, If CUDA was installed properly.
+
+## Inference
+
+![image](https://github.com/rajag0pal/FaceMaskDetector/assets/80576855/49f37a82-b87d-4373-8919-7a06f29f5d22)
+
+The above results are from the custom trained ssd_mobilenet_v2_fpnlite_320x320_coco17 model. The results are better than EfficientDET this time, but again still require some improvements.
+
+- Result 1 : The bounding box provides a perfect detection on person not wearing mask
+- Result 2 : Unlike EfficientDET, MobileNET SSD behaves way better when someone covers the mouth with shirt.
+- Result 3 : The same issue with MobileNET SSD as well, that even covering mouth with hands detected as 'with_mask'
+- Result 4 : Detected perfectly
+- Result 5 : Here the model needs more fine tuning. It detects correctly, but the mask is not weared on mouth.
+- Result 6 : Result is good, though mask is still in the picture, it is not weared, hence No mask.
+- Result 7 : This time also the result is good. It says 91% a mask_weared_incorrect.
