@@ -175,3 +175,14 @@ Protoc 24.0-win64 - https://github.com/protocolbuffers/protobuf/releases/downloa
 https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/install.html
 
 # ![Static Badge](https://img.shields.io/badge/nvidia-grey?logo=nvidia) Local NVIDIA GPU Setup 
+
+If you have a GPU hardware component in your local machine, make sure you have the one that has **CUDA** support. CUDA stands for Compute Unified Device Architecture, which is a parallel computing platform and API model developed by Nvidia. <br>
+To know the list of CUDA enabled NVIDAI GPUs, check this link. https://developer.nvidia.com/cuda-gpus
+
+![image](https://github.com/rajag0pal/FaceMaskDetector/assets/80576855/c084b2db-c32d-4680-b95b-765aae374199)
+
+### Tensorflow and CUDA
+
+**Note** : Tensorflow versions influence directly with the CUDA version. Installing incompatible versions doesn't make tensorflow to detect GPUs.
+
+![image](https://github.com/rajag0pal/FaceMaskDetector/assets/80576855/04e96883-feb4-4f8f-b85e-ef8b9191ff76)
