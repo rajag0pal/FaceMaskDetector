@@ -186,3 +186,75 @@ To know the list of CUDA enabled NVIDAI GPUs, check this link. https://developer
 **Note** : Tensorflow versions influence directly with the CUDA version. Installing incompatible versions doesn't make tensorflow to detect GPUs.
 
 ![image](https://github.com/rajag0pal/FaceMaskDetector/assets/80576855/04e96883-feb4-4f8f-b85e-ef8b9191ff76)
+
+### cuDNN 
+
+The NVIDIA CUDA® Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks. cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers.
+- Tensor Core acceleration for all popular convolutions including 2D, 3D, Grouped, Depth-wise separable, and Dilated with NHWC and NCHW inputs and outputs
+- Optimized kernels for computer vision and speech models including ResNet, ResNext, EfficientNet, EfficientDet, SSD, MaskRCNN, Unet, VNet, BERT, GPT-2, Tacotron2 and WaveGlow
+- Support for FP32, FP16, BF16 and TF32 floating point formats and INT8, and UINT8 integer formats
+- Support for fusion of memory-limited operations like pointwise and reduction with math-limited operations like convolution and matmul
+- Support for Windows and Linux with the latest NVIDIA data center and mobile GPUs.
+
+I have **NVIDIA GeForce GTX 1650 GPU with 4GB memory. This supprots CUDA. And I install this combination of Tensorflow 2.6 | CUDA 11.2 | cuDNN 8.2
+
+- CUDA 11.2 ToolKit - https://developer.nvidia.com/cuda-11.2.0-download-archive?target_os=Windows&target_arch=x86_64
+- cuDNN 8.2 - https://developer.nvidia.com/cudnn
+
+Once these are downloaded, the installation process is simple and automative. All you need to do is to choose the installation directory. The CUDA installer will automatically install the required drivers. 
+
+![image](https://github.com/rajag0pal/FaceMaskDetector/assets/80576855/542c0191-88f0-4268-9338-6df53eba7b98)
+
+After this, go to the installed directory. Usually the default is User/Program Files/ NVIDIA GPU Computing Toolkit/CUDA
+
+![image](https://github.com/rajag0pal/FaceMaskDetector/assets/80576855/2e59fb65-fb9d-48ca-ac79-5192aaab4dda)
+
+cuDNN is a zipped file.
+
+![image](https://github.com/rajag0pal/FaceMaskDetector/assets/80576855/cafa84a6-bdb7-4a70-ac83-27cbb591e74b)
+
+```
+cuDNN
+  ├─ bin
+  ├─ include
+  └─ lib
+```
+Copy all the files from these directories and paste those in the same named corresponding directories in User/Program Files/ NVIDIA GPU Computing Toolkit/CUDA. Once we done with this, add these directory PATH to the Environment Variable. 
+
+## GPU check
+
+We can check after the CUDA installation, that whether the tensorflow API we have by now, does have an access to our GPU or not, through this code snippet<br>
+Go to your env or cmd
+```
+>> C:\Users >python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+```
+Output:
+```
+[PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+```
+If tensorflow doesn't got the access, the output will be an empty list, when means CUDA is not properly configured.
+```
+[]
+```
+
+Alternatively, we can also check the GPU installation, using this command.
+
+Go to your cmd
+```
+C:\Users > nvidia-smi
+```
+Output:
+```
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 460.89       Driver Version: 460.89       CUDA Version: 11.2     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name            TCC/WDDM | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 1650   WDDM  | 00000000:01:00.0 Off |                  N/A |
+| N/A   42C    P8     4W /  N/A |    204MiB /  4096MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+```
+We will get exactly like this, If CUDA was installed properly.
