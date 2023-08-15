@@ -159,7 +159,7 @@ cd Tensorflow/models/research
 ```
 !protoc object_detection/protos/*.proto --python_out=.
 ```
-If protoc is not installl in your machine, we need to download it explictly by heading towards protoc releases github page (https://github.com/protocolbuffers/protobuf/releases)
+If protoc is not installed in your machine, we need to download it explictly by heading towards 'protoc releases' github page (https://github.com/protocolbuffers/protobuf/releases)
 
 Go to Assets -> select the version for the os you have
 
@@ -176,8 +176,8 @@ https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/instal
 
 # ![Static Badge](https://img.shields.io/badge/nvidia-grey?logo=nvidia) Local NVIDIA GPU Setup 
 
-If you have a GPU hardware component in your local machine, make sure you have the one that has **CUDA** support. CUDA stands for Compute Unified Device Architecture, which is a parallel computing platform and API model developed by Nvidia. <br>
-To know the list of CUDA enabled NVIDAI GPUs, check this link. https://developer.nvidia.com/cuda-gpus
+If you have a GPU hardware component in your local machine, make sure that you have the one that has **CUDA** support. CUDA stands for Compute Unified Device Architecture, which is a parallel computing platform and API model developed by Nvidia. <br>
+To know the list of CUDA enabled NVIDIA GPUs, check this link. https://developer.nvidia.com/cuda-gpus
 
 ![image](https://github.com/rajag0pal/FaceMaskDetector/assets/80576855/c084b2db-c32d-4680-b95b-765aae374199)
 
@@ -196,16 +196,16 @@ The NVIDIA CUDA® Deep Neural Network library (cuDNN) is a GPU-accelerated libra
 - Support for fusion of memory-limited operations like pointwise and reduction with math-limited operations like convolution and matmul
 - Support for Windows and Linux with the latest NVIDIA data center and mobile GPUs.
 
-I have **NVIDIA GeForce GTX 1650 GPU with 4GB memory. This supprots CUDA. And I install this combination of Tensorflow 2.6 | CUDA 11.2 | cuDNN 8.2
+I have **NVIDIA GeForce GTX 1650** GPU with 4GB memory. This supprots CUDA. And I installed this combination of Tensorflow 2.6 | CUDA 11.2 | cuDNN 8.1
 
 - CUDA 11.2 ToolKit - https://developer.nvidia.com/cuda-11.2.0-download-archive?target_os=Windows&target_arch=x86_64
-- cuDNN 8.2 - https://developer.nvidia.com/cudnn
+- cuDNN 8.1 - https://developer.nvidia.com/cudnn
 
-Once these are downloaded, the installation process is simple and automative. All you need to do is to choose the installation directory. The CUDA installer will automatically install the required drivers. 
+Once the files are downloaded, the installation process is simple and automative. All you need to do is to choose the installation directory. The CUDA installer will automatically install the required drivers. 
 
 ![image](https://github.com/rajag0pal/FaceMaskDetector/assets/80576855/542c0191-88f0-4268-9338-6df53eba7b98)
 
-After this, go to the installed directory. Usually the default is User/Program Files/ NVIDIA GPU Computing Toolkit/CUDA
+After this, go to the installed directory. Usually the default is User/Program Files/NVIDIA GPU Computing Toolkit/CUDA
 
 ![image](https://github.com/rajag0pal/FaceMaskDetector/assets/80576855/2e59fb65-fb9d-48ca-ac79-5192aaab4dda)
 
@@ -223,7 +223,7 @@ Copy all the files from these directories and paste those in the same named corr
 
 ## GPU check
 
-We can check after the CUDA installation, that whether the tensorflow API we have by now, does have an access to our GPU or not, through this code snippet<br>
+We can check after the CUDA installation, that whether the tensorflow API we have by now, does have an access to our GPU or not, through a code snippet.<br>
 Go to your env or cmd
 ```
 >> C:\Users >python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
