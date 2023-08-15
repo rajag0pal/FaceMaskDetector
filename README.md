@@ -50,7 +50,7 @@ FaceMaskDetector/
 Make sure you create all these directories in your environment before begin to build the model.
 
 ## Data Acquisition
-### Kaggle API
+### ![Static Badge](https://img.shields.io/badge/kaggle-grey?logo=kaggle) Kaggle API
 
 Navigate to your kaggle account, and in settings, find something called **API**. And then generate new token. A json (kaggle.json) file will be dowloaded.
 
@@ -71,13 +71,13 @@ Now head back to the dataset repo, and copy the API command.
 
 ![image](https://github.com/rajag0pal/FaceMaskDetector/assets/80576855/008861a6-01c4-43bb-8a9e-fb95f573c98d)
 
-Once the API is copied, paste the command in the python shell, and run it.
+Once the API command is copied, paste it in the python shell, and run it.
 
 ```
 !kaggle datasets download -d andrewmvd/face-mask-detection
 ```
 
-Once the dataset has been downloaded using kaggle API, it has to be unzipped accordingly now in the respective directories. The face mask dataset zip file contains following files.
+Once the dataset has been downloaded using kaggle API, it has to be unzipped accordingly to the respective directories. The face mask dataset zip file contains the following files.
 
 ```
 face-mask-detection.zip
@@ -85,7 +85,7 @@ face-mask-detection.zip
         └─ annotations
 ```
 
-Image has to be unzipped to 'Tensorflow/workspaces/allimages' directory and then train test split has to be done.
+Dataset has to be unzipped to 'Tensorflow/workspaces/allimages' directory and then train test split has to be done.
 
 ```
 # unzipping images seperately
@@ -140,7 +140,7 @@ for image in test_images:
     shutil.move(os.path.join(source_folder, annotation), os.path.join(test_folder))
 ```
 
-## Tensorflow Object Detection API
+## ![Static Badge](https://img.shields.io/badge/Object_Detection_API-grey?logo=tensorflow) Tensorflow Object Detection API
 
 clone the API from this github repo https://github.com/tensorflow/models
 
@@ -173,3 +173,5 @@ Protoc 24.0-win64 - https://github.com/protocolbuffers/protobuf/releases/downloa
 
 ### For detailed Tensorflow Object Detection API tutorial
 https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/install.html
+
+# ![Static Badge](https://img.shields.io/badge/nvidia-grey?logo=nvidia) Local NVIDIA GPU Setup 
