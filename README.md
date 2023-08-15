@@ -1,5 +1,6 @@
 # FaceMaskDetector
-![colab]https://img.shields.io/badge/google-colab-%23F9AB00?logo=googlecolab
+![Static Badge](https://img.shields.io/badge/google-colab-%23F9AB00?logo=googlecolab)
+
 
 
 ### Custom Object detection model for detecting face mask wear in real time using Tensorflow Object Detection API.
