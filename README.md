@@ -1,5 +1,7 @@
 # FaceMaskDetector
 ![Static Badge](https://img.shields.io/badge/google-colab-%23F9AB00?logo=googlecolab)
+![Static Badge](https://img.shields.io/badge/conda-grey?logo=anaconda)
+
 
 
 
